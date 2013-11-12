@@ -1,18 +1,16 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddSubjectActivity">
+    tools:context=".activities.AddHomeworkActivity">
 
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.AddSubjectActivity">
+        tools:context=".activities.AddHomeworkActivity">
 
         <!--
         This title strip will display the currently visible page title, as well as the page
@@ -30,8 +28,7 @@
             android:textColor="#fff" />
     </android.support.v4.view.ViewPager>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -40,8 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/add_subject_page_name"
-            android:id="@+id/addsubject_pageName"
+            android:text="@string/add_homework_page_name"
+            android:id="@+id/add_homework_pageName"
             android:gravity="center_horizontal" />
 
         <LinearLayout
@@ -66,27 +63,17 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/textView_updateFrequency"
                     android:layout_gravity="left|right"
-                    android:text="@string/add_subject_subject_name"
+                    android:text="@string/add_homework_subject"
                     android:layout_margin="@dimen/activity_all_margin" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/add_subject_teacher"
+                    android:text="@string/add_homework_submit_date"
                     android:id="@+id/textView_measureUnits"
                     android:layout_gravity="left"
                     android:layout_margin="@dimen/activity_all_margin" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/add_subject_color"
-                    android:id="@+id/textView_orderBy"
-                    android:layout_margin="@dimen/activity_all_margin"
-                    android:layout_gravity="left" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -96,50 +83,51 @@
                 android:orientation="vertical"
                 android:layout_gravity="left">
 
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text|textCapSentences"
-                    android:ems="10"
-                    android:id="@+id/add_subject_new_subjectname"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/activity_row_margin" />
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_gravity="right">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text|textCapSentences"
-                    android:ems="10"
-                    android:id="@+id/add_subject_new_teacher"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_gravity="center_horizontal" />
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/add_homework_spinner"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/add_subject_color_spinner"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_gravity="center_horizontal" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_homework_addNewSubjectButton"
+                        android:id="@+id/add_homework_addNewSubjectButton"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                </LinearLayout>
+
+
+                <DatePicker
+                    android:id="@+id/add_homework_datepicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_subject_create_button"
-                    android:id="@+id/add_subject_createbutton"
+                    android:text="@string/add_homework_addbutton"
+                    android:id="@+id/add_homework_addbutton"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
