@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">School Calendar</string>
+    <string name="action_logout">Logout</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="open_drawer_message">Open course categories</string>
+    <string name="close_drawer_message">Close course categories</string>
+
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_loginButton">Login</string>
+    <string name="login_registerButton">Register</string>
+    <string name="login_showPassword">Show password</string>
+
+</resources>
