@@ -15,4 +15,6 @@
     <string name="login_registerButton">Register</string>
     <string name="login_showPassword">Show password</string>
 
+    <string name="home_name">Your daily schedule</string>
+
 </resources>

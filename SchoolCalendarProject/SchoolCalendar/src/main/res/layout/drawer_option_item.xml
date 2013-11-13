@@ -9,6 +9,4 @@
     android:id="@+id/textView"
     android:textColor="#ffffff"
     android:gravity="center|center_vertical"
-    android:background="?android:attr/activatedBackgroundIndicator">
-</TextView>
-
+    android:background="?android:attr/activatedBackgroundIndicator"/>

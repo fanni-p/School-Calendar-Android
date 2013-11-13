@@ -22,19 +22,19 @@ public class NavigationDrawerHelper {
     private ActionBarDrawerToggle mDrawerToggle;
 
     public void init(Activity theActivity, ListView.OnItemClickListener listener) {
-        mDrawerLayout = (DrawerLayout) theActivity.findViewById(R.id.drawer_layout);
-        mDrawerListView = (ListView) theActivity.findViewById(R.id.navigation_drawer);
+        this.mDrawerLayout = (DrawerLayout) theActivity.findViewById(R.id.drawer_layout);
+        this.mDrawerListView = (ListView) theActivity.findViewById(R.id.navigation_drawer);
 
         String[] navigationDrawerOptions =
                 theActivity.getResources().getStringArray(R.array.navigation_drawer_options);
         ArrayAdapter<String> navigationDrawerAdapter =
                 new ArrayAdapter<String>(theActivity, R.layout.drawer_option_item, navigationDrawerOptions);
 
-        mDrawerListView.setAdapter(navigationDrawerAdapter);
-        mDrawerListView.setOnItemClickListener(listener);
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        this.mDrawerListView.setAdapter(navigationDrawerAdapter);
+        this.mDrawerListView.setOnItemClickListener(listener);
+        this.mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        this.mDrawerListView.setItemChecked(0, true);
 
-        mDrawerListView.setItemChecked(0, true);
         setupActionBar(theActivity);
     }
 
@@ -44,9 +44,9 @@ public class NavigationDrawerHelper {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mDrawerToggle = new ActionBarDrawerToggle(
+        this.mDrawerToggle = new ActionBarDrawerToggle(
                 currentActivity,
-                mDrawerLayout,
+                this.mDrawerLayout,
                 R.drawable.ic_drawer,
                 R.string.open_drawer_message,
                 R.string.close_drawer_message
@@ -66,12 +66,12 @@ public class NavigationDrawerHelper {
     }
 
     public void handleSelect(int option) {
-        mDrawerListView.setItemChecked(option, true);
-        mDrawerLayout.closeDrawer(mDrawerListView);
+        this.mDrawerListView.setItemChecked(option, true);
+        this.mDrawerLayout.closeDrawer(mDrawerListView);
     }
 
     public void handleOnPrepareOptionsMenu(Menu menu) {
-        boolean itemVisible = !mDrawerLayout.isDrawerOpen(mDrawerListView);
+        boolean itemVisible = !this.mDrawerLayout.isDrawerOpen(this.mDrawerListView);
 
         for (int index = 0; index < menu.size(); index++) {
             MenuItem item = menu.getItem(index);
@@ -81,14 +81,14 @@ public class NavigationDrawerHelper {
     }
 
     public void handleOnOptionsItemSelected(MenuItem item) {
-        mDrawerToggle.onOptionsItemSelected(item);
+        this.mDrawerToggle.onOptionsItemSelected(item);
     }
 
     public void syncState() {
-        mDrawerToggle.syncState();
+        this.mDrawerToggle.syncState();
     }
 
     public void setSelection(int option) {
-        mDrawerListView.setItemChecked(option, true);
+        this.mDrawerListView.setItemChecked(option, true);
     }
 }
