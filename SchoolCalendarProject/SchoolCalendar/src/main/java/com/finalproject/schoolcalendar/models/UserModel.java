@@ -39,4 +39,12 @@ public class UserModel {
     public void setAuthCode(String authCode) {
         this.authCode = authCode;
     }
+
+    public String getAccessToken() {
+        return this.accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 }

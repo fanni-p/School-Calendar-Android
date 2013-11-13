@@ -7,7 +7,8 @@ import com.google.gson.Gson;
  * Created by Fani on 11/13/13.
  */
 public class DataPersister {
-    private static String BASE_URL = "http://timetableservices.apphb.com/api/";
+    private static final String BASE_URL = "http://timetableservices.apphb.com/api/";
+
     private static Gson mGson = new Gson();
 
     public static HttpResponse Login(UserModel userModel) {

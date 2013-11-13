@@ -16,7 +16,7 @@ import com.finalproject.schoolcalendar.R;
 /**
  * Created by Fani on 11/12/13.
  */
-public class NavigationDrawerHelper {
+public class NavigationDrawerManager {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private ActionBarDrawerToggle mDrawerToggle;
