@@ -39,6 +39,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/home_name"
             android:id="@+id/homeActivity_pageName" />
+
+        <ListView
+            android:id="@+id/lessons_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </LinearLayout>
 
     <ListView

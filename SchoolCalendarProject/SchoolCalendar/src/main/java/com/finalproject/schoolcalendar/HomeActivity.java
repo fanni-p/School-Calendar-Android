@@ -1,16 +1,23 @@
 package com.finalproject.schoolcalendar;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.finalproject.schoolcalendar.data.DataPersister;
@@ -18,15 +25,17 @@ import com.finalproject.schoolcalendar.data.HttpResponseHelper;
 import com.finalproject.schoolcalendar.helpers.NavigationDrawerManager;
 import com.finalproject.schoolcalendar.helpers.SessionManager;
 import com.finalproject.schoolcalendar.models.LessonModel;
+import com.finalproject.schoolcalendar.models.LessonType;
+import com.finalproject.schoolcalendar.models.LessonsArrayAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Fani on 11/13/13.
@@ -38,9 +47,12 @@ public class HomeActivity extends FragmentActivity
     private String mUsername;
     private String mAccessToken;
     private Handler mHandler;
+    private ListView mLessonsList;
     private HandlerThread mHandledThread;
     private SessionManager mSessionManager;
+    private LessonsArrayAdapter mLessonArrayAdapter;
     private NavigationDrawerManager mNavigationDrawerManager;
+    private LessonModel[] mLessonsPerDay;
     //private ViewPager mViewPager;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -135,28 +147,26 @@ public class HomeActivity extends FragmentActivity
             @Override
             public void run() {
                 HttpResponseHelper response = DataPersister.GetLessonsPerDay(accessToken);
-                handleGetLessonsResponse(response);
+                HomeActivity.this.handleGetLessonsResponse(response);
             }
         });
     }
 
-    private LessonModel handleGetLessonsResponse(HttpResponseHelper response) {
-        if(response.isStatusOk()){
-//            GsonBuilder gsonBuilder = new GsonBuilder();
-//            gsonBuilder.setDateFormat("HH:mm:ss").create();
-            //ArrayList<LessonModel> lessonsPerDay = this.mGson.fromJson(response.getMessage(), ArrayList<LessonModel>.class);
+    private void handleGetLessonsResponse(HttpResponseHelper response) {
+        if (response.isStatusOk()) {
+            this.mLessonsPerDay = this.mGson.fromJson(response.getMessage(), LessonModel[].class);
 
-            LessonModel[] lessonsPerDay =  this.mGson.fromJson(response.getMessage(), LessonModel[].class);
-
-           LessonModel firstLesson = lessonsPerDay[0];
-//            Type type = new TypeToken<List<LessonModel>>(){}.getType();
-//            List<LessonModel> lessonsPerDay =  this.mGson.fromJson(response.getMessage(), type);
-            return firstLesson;
+            HomeActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    HomeActivity.this.mLessonArrayAdapter = new LessonsArrayAdapter(HomeActivity.this,
+                            R.layout.lessonslist_item_row, HomeActivity.this.mLessonsPerDay);
+                    HomeActivity.this.mLessonsList = (ListView) findViewById(R.id.lessons_listview);
+                    HomeActivity.this.mLessonsList.setAdapter(HomeActivity.this.mLessonArrayAdapter);
+                }
+            });
         }
-
-        return null;
     }
-
     private void handleLogoutCommand() {
         final String accessToken = this.mAccessToken;
         this.mHandler.post(new Runnable() {
@@ -176,3 +186,4 @@ public class HomeActivity extends FragmentActivity
         }
     }
 }
+
