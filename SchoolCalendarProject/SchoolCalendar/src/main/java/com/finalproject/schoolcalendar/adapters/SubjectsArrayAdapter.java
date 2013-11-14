@@ -19,14 +19,14 @@ public class SubjectsArrayAdapter extends ArrayAdapter<SubjectModel> {
 
     private int mResourceId;
     private Context mContext;
-    private SubjectModel[] mLessonsObjects;
+    private SubjectModel[] mSubjectsObjects;
 
     public SubjectsArrayAdapter(Context context, int resourceId, SubjectModel[] subjectsObjects) {
         super(context, resourceId, subjectsObjects);
 
         this.mContext = context;
         this.mResourceId = resourceId;
-        this.mLessonsObjects = subjectsObjects;
+        this.mSubjectsObjects = subjectsObjects;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SubjectsArrayAdapter extends ArrayAdapter<SubjectModel> {
             LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(this.mResourceId, parent, false);
 
-            String convertedColor = ColorConverter.ParseColor(this.mLessonsObjects[position].getColor());
+            String convertedColor = ColorConverter.ParseColor(this.mSubjectsObjects[position].getColor());
             subjectColor = Color.parseColor(convertedColor);
 
             subjectHolder = new SubjectHolder();
@@ -53,7 +53,7 @@ public class SubjectsArrayAdapter extends ArrayAdapter<SubjectModel> {
             subjectHolder = (SubjectHolder) row.getTag();
         }
 
-        SubjectModel subject = this.mLessonsObjects[position];
+        SubjectModel subject = this.mSubjectsObjects[position];
         subjectHolder.subject_name.setText(subject.getName());
         if (subjectColor != 0) {
             subjectHolder.subject_color.setBackgroundColor(subjectColor);

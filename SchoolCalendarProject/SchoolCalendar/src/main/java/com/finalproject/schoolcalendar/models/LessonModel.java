@@ -16,16 +16,13 @@ public class LessonModel {
     private String room;
     private String note;
     private String subject;
-    private String endTime;
-    private String startTime;
+    private Date endTime;
+    private Date startTime;
     private String subjectColor;
     private LessonType type;
-    private Date date;
-    private SimpleDateFormat uiTimeFormat;
-    private SimpleDateFormat jsonTimeFormat;
 
     public LessonModel(int id, String subject, String subjectColor, String day,
-                       int dayNumber, String startTime, String endTime, LessonType type, String room, String note) {
+                       int dayNumber, Date startTime, Date endTime, LessonType type, String room, String note) {
         this.id = id;
         this.subject = subject;
         this.subjectColor = subjectColor;
@@ -78,47 +75,19 @@ public class LessonModel {
         this.dayNumber = dayNumber;
     }
 
-    public String getStartTime() {
-        if (this.uiTimeFormat == null) {
-            this.uiTimeFormat = new SimpleDateFormat("hh:mm aa");
-        }
-
-        try {
-            if (this.jsonTimeFormat == null) {
-                this.jsonTimeFormat = new SimpleDateFormat("HH:mm:ss");
-            }
-
-            this.date = this.jsonTimeFormat.parse(startTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return this.uiTimeFormat.format(date);
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
-        if (this.uiTimeFormat == null) {
-            this.uiTimeFormat = new SimpleDateFormat("hh:mm aa");
-        }
-
-        try {
-            if (this.jsonTimeFormat == null) {
-                this.jsonTimeFormat = new SimpleDateFormat("HH:mm:ss");
-            }
-
-            this.date = this.jsonTimeFormat.parse(endTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return this.uiTimeFormat.format(date);
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

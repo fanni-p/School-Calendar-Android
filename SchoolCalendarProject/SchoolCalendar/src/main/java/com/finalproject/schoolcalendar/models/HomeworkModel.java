@@ -1,5 +1,9 @@
 package com.finalproject.schoolcalendar.models;
 
+import android.text.format.DateFormat;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,6 +14,9 @@ public class HomeworkModel {
     private boolean isDone;
     private String subject;
     private Date submitDate;
+    private SimpleDateFormat uiTimeFormat;
+    private SimpleDateFormat jsonTimeFormat;
+    private String date;
 
     public HomeworkModel(int id, String subject, Date submitDate, boolean isDone) {
         this.id = id;

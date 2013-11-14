@@ -21,6 +21,7 @@ import com.finalproject.schoolcalendar.helpers.SessionManager;
 import com.finalproject.schoolcalendar.models.LessonModel;
 import com.finalproject.schoolcalendar.adapters.LessonsArrayAdapter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 
@@ -46,7 +47,7 @@ public class HomeActivity extends ListActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        this.mGson = new Gson();
+        this.mGson = new GsonBuilder().setDateFormat("HH:mm:ss").create();
         this.mSessionManager = new SessionManager(getApplicationContext());
 
         this.mSessionManager.checkLogin();

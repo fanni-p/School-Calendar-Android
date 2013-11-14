@@ -76,36 +76,8 @@ public class AllSubjects extends ListActivity
         this.mHandledThread = null;
     }
 
-    private void getData() {
-        final String accessToken = this.mAccessToken;
-        this.mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                HttpResponseHelper response = DataPersister.GetAllSubjects(accessToken);
-                AllSubjects.this.handleGetAllSubjectsResponse(response);
-            }
-        });
-    }
-
-    private void handleGetAllSubjectsResponse(HttpResponseHelper response) {
-        if (response.isStatusOk()) {
-            this.mAllSubjects = this.mGson.fromJson(response.getMessage(), SubjectModel[].class);
-
-            AllSubjects.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    AllSubjects.this.mSubjectArrayAdapter = new SubjectsArrayAdapter(AllSubjects.this,
-                            R.layout.subjectlist_item_row, AllSubjects.this.mAllSubjects);
-                    AllSubjects.this.mSubjectsList = (ListView) findViewById(android.R.id.list);
-                    AllSubjects.this.mSubjectsList.setAdapter(AllSubjects.this.mSubjectArrayAdapter);
-                }
-            });
-        }
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //mCoursePagerAdapter.setCourseLib(optionLib);
         this.mNavigationDrawerManager.handleSelect(position);
     }
 
@@ -143,5 +115,32 @@ public class AllSubjects extends ListActivity
     public void onConfigurationChanged(Configuration newConfig) {
         this.mNavigationDrawerManager.syncState();
         super.onConfigurationChanged(newConfig);
+    }
+
+    private void getData() {
+        final String accessToken = this.mAccessToken;
+        this.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                HttpResponseHelper response = DataPersister.GetAllSubjects(accessToken);
+                AllSubjects.this.handleGetAllSubjectsResponse(response);
+            }
+        });
+    }
+
+    private void handleGetAllSubjectsResponse(HttpResponseHelper response) {
+        if (response.isStatusOk()) {
+            this.mAllSubjects = this.mGson.fromJson(response.getMessage(), SubjectModel[].class);
+
+            AllSubjects.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AllSubjects.this.mSubjectArrayAdapter = new SubjectsArrayAdapter(AllSubjects.this,
+                            R.layout.subjectlist_item_row, AllSubjects.this.mAllSubjects);
+                    AllSubjects.this.mSubjectsList = (ListView) findViewById(android.R.id.list);
+                    AllSubjects.this.mSubjectsList.setAdapter(AllSubjects.this.mSubjectArrayAdapter);
+                }
+            });
+        }
     }
 }

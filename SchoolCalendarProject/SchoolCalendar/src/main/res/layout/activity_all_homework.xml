@@ -44,6 +44,23 @@
             android:text="All Homework"
             android:id="@+id/homeActivity_pageName"
             android:gravity="center_horizontal"/>
+
+        <ListView
+            android:id="@android:id/list"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:choiceMode="singleChoice" />
+
+        <TextView
+            android:id="@android:id/empty"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/home_loading_data"
+            android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
 
     <ListView

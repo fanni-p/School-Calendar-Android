@@ -15,8 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:uiOptions="splitActionBarWhenNarrow">
+        android:theme="@style/AppTheme">
         <activity android:name=".activities.LoginActivity" />
         <activity
             android:name=".activities.HomeActivity">
@@ -27,12 +26,12 @@
         </activity>
         <activity
             android:name=".activities.WeekSchedule"
-            android:parentActivityName=".activities.HomeActivity" />
+            android:noHistory="true" />
         <activity
             android:name=".activities.AllSubjects"
-            android:parentActivityName=".activities.HomeActivity" />
+            android:noHistory="true" />
         <activity
             android:name=".activities.AllHomework"
-            android:parentActivityName=".activities.HomeActivity" />
+            android:noHistory="true" />
     </application>
 </manifest>
