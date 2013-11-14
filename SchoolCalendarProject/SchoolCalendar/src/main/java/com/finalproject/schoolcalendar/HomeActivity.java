@@ -7,11 +7,13 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.finalproject.schoolcalendar.data.DataPersister;
 import com.finalproject.schoolcalendar.data.HttpResponse;
@@ -132,7 +134,7 @@ public class HomeActivity extends FragmentActivity
         if (response.isStatusOk()) {
             this.mSessionManager.logoutUser();
         } else {
-            //TODO  Create Toast Notification
+            Toast.makeText(this, "Logout failed. Please try again!", Toast.LENGTH_LONG).show();
         }
     }
 }

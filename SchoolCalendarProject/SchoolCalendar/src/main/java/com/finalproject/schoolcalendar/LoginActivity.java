@@ -1,6 +1,7 @@
 package com.finalproject.schoolcalendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.finalproject.schoolcalendar.data.DataPersister;
 import com.finalproject.schoolcalendar.data.HttpResponse;
@@ -28,10 +30,17 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends Activity {
 
+    private static final int MIN_LENGTH = 5;
+    private static final int MAX_LENGTH = 30;
+    private static final int ACCESSTOKEN_LENGTH = 50;
+
     private Gson mGson;
+    private String mAuthCode;
+    private UserModel mUserModel;
     private Handler mHandler;
     private HandlerThread mHandledThread;
     private SessionManager mSessionManager;
+    private boolean mValidationSuccess;
 
 
     @Override
@@ -41,8 +50,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         setupButtons();
-        this.mSessionManager = new SessionManager(getApplicationContext());
+
         this.mGson = new Gson();
+        this.mValidationSuccess = false;
+        this.mAuthCode = null;
+        this.mUserModel = null;
+        this.mSessionManager = new SessionManager(getApplicationContext());
         this.mHandledThread = new HandlerThread("UserServiceThread");
         this.mHandledThread.start();
 
@@ -94,36 +107,42 @@ public class LoginActivity extends Activity {
 
     private void handleRegisterButton() {
         final UserModel userModel = this.createUserModel();
-        this.mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                DataPersister.Register(userModel);
-                HttpResponse response = DataPersister.Login(userModel);
-                handleLoginResponse(response);
-            }
-        });
+        if (userModel != null) {
+            this.mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    DataPersister.Register(userModel);
+                    HttpResponse response = DataPersister.Login(userModel);
+                    handleLoginResponse(response);
+                }
+            });
+        }
     }
 
     private void handleLoginButton() {
         final UserModel userModel = this.createUserModel();
-        this.mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                HttpResponse response = DataPersister.Login(userModel);
-                handleLoginResponse(response);
-            }
-        });
+        if (userModel != null) {
+            this.mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    HttpResponse response = DataPersister.Login(userModel);
+                    handleLoginResponse(response);
+                }
+            });
+        }
     }
 
     private void handleLoginResponse(HttpResponse response) {
         if (response.isStatusOk()) {
             UserModel resultUserModel = this.mGson.fromJson(response.getMessage(), UserModel.class);
-            this.mSessionManager.createLoginSession(resultUserModel.getUsername(), resultUserModel.getAccessToken());
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            this.startActivity(intent);
-            this.finish();
+            if (resultUserModel != null && resultUserModel.getAccessToken().length() == ACCESSTOKEN_LENGTH) {
+                this.mSessionManager.createLoginSession(resultUserModel.getUsername(), resultUserModel.getAccessToken());
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                this.startActivity(intent);
+                this.finish();
+            }
         } else {
-            //TODO  Create Toast Notification
+            Toast.makeText(this, "Login failed. Please try again!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -131,12 +150,33 @@ public class LoginActivity extends Activity {
         EditText usernameTextField = (EditText) this.findViewById(R.id.login_username);
         EditText passwordTextField = (EditText) this.findViewById(R.id.login_password);
 
-        final String username = usernameTextField.getText().toString();
-        final String password = passwordTextField.getText().toString();
-        final String authCode = Sha1Generator.getSha1(username, password);
-        // TODO Validation Username, password, authCode
-        UserModel userModel = new UserModel(username, authCode);
+        String username = usernameTextField.getText().toString();
+        String password = passwordTextField.getText().toString();
 
-        return userModel;
+        if (username.trim().length() > 0 && password.trim().length() > 0) {
+            this.mValidationSuccess = this.ValidateUsernameAndPassword(username, password);
+            if (this.mValidationSuccess) {
+                this.mAuthCode = Sha1Generator.getSha1(username, password);
+                this.mUserModel = new UserModel(username, this.mAuthCode);
+            } else {
+                Toast.makeText(this,
+                        "Username and password must be between 5 and 30 characters", Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Please enter username and password", Toast.LENGTH_LONG).show();
+        }
+
+        return this.mUserModel;
+    }
+
+    private boolean ValidateUsernameAndPassword(String username, String password) {
+        if (username.length() < MIN_LENGTH || MAX_LENGTH < username.length()) {
+            return false;
+        } else if (password.length() < MIN_LENGTH || MAX_LENGTH < password.length()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
