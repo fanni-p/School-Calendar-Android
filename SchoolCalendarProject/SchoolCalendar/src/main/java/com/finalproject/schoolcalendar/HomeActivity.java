@@ -1,13 +1,11 @@
 package com.finalproject.schoolcalendar;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +14,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.finalproject.schoolcalendar.data.DataPersister;
-import com.finalproject.schoolcalendar.data.HttpResponse;
+import com.finalproject.schoolcalendar.data.HttpResponseHelper;
 import com.finalproject.schoolcalendar.helpers.NavigationDrawerManager;
 import com.finalproject.schoolcalendar.helpers.SessionManager;
+import com.finalproject.schoolcalendar.models.LessonModel;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Fani on 11/13/13.
@@ -28,6 +34,7 @@ import java.util.HashMap;
 public class HomeActivity extends FragmentActivity
         implements ListView.OnItemClickListener {
 
+    private Gson mGson;
     private String mUsername;
     private String mAccessToken;
     private Handler mHandler;
@@ -41,6 +48,7 @@ public class HomeActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        this.mGson = new Gson();
         this.mSessionManager = new SessionManager(getApplicationContext());
 
         this.mSessionManager.checkLogin();
@@ -68,6 +76,8 @@ public class HomeActivity extends FragmentActivity
         if (looper != null) {
             this.mHandler = new Handler(looper);
         }
+
+        this.getData();
     }
 
     @Override
@@ -119,18 +129,46 @@ public class HomeActivity extends FragmentActivity
         super.onConfigurationChanged(newConfig);
     }
 
+    private void getData() {
+        final String accessToken = this.mAccessToken;
+        this.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                HttpResponseHelper response = DataPersister.GetLessonsPerDay(accessToken);
+                handleGetLessonsResponse(response);
+            }
+        });
+    }
+
+    private LessonModel handleGetLessonsResponse(HttpResponseHelper response) {
+        if(response.isStatusOk()){
+//            GsonBuilder gsonBuilder = new GsonBuilder();
+//            gsonBuilder.setDateFormat("HH:mm:ss").create();
+            //ArrayList<LessonModel> lessonsPerDay = this.mGson.fromJson(response.getMessage(), ArrayList<LessonModel>.class);
+
+            LessonModel[] lessonsPerDay =  this.mGson.fromJson(response.getMessage(), LessonModel[].class);
+
+           LessonModel firstLesson = lessonsPerDay[0];
+//            Type type = new TypeToken<List<LessonModel>>(){}.getType();
+//            List<LessonModel> lessonsPerDay =  this.mGson.fromJson(response.getMessage(), type);
+            return firstLesson;
+        }
+
+        return null;
+    }
+
     private void handleLogoutCommand() {
         final String accessToken = this.mAccessToken;
         this.mHandler.post(new Runnable() {
             @Override
             public void run() {
-                HttpResponse response = DataPersister.Logout(accessToken);
+                HttpResponseHelper response = DataPersister.Logout(accessToken);
                 handleLogoutResponse(response);
             }
         });
     }
 
-    private void handleLogoutResponse(HttpResponse response) {
+    private void handleLogoutResponse(HttpResponseHelper response) {
         if (response.isStatusOk()) {
             this.mSessionManager.logoutUser();
         } else {

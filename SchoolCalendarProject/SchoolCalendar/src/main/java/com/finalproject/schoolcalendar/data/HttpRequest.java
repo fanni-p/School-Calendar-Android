@@ -13,7 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
  * Created by Fani on 11/13/13.
  */
 public class HttpRequest {
-    public static HttpResponse get(String url, String accessToken) {
+    public static HttpResponseHelper get(String url, String accessToken) {
         String content = null;
         String error = null;
 
@@ -21,6 +21,10 @@ public class HttpRequest {
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet(url);
             httpGet.setHeader("Content-type", "application/json");
+            if(accessToken != null){
+                httpGet.setHeader("X-accessToken", accessToken);
+            }
+
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             content = client.execute(httpGet, responseHandler);
         } catch (Exception e) {
@@ -28,16 +32,13 @@ public class HttpRequest {
         }
 
         if (error != null) {
-            return new HttpResponse(false, error);
+            return new HttpResponseHelper(false, error);
         } else {
-            return new HttpResponse(true, content);
+            return new HttpResponseHelper(true, content);
         }
     }
 
-    public static HttpResponse post(String url, String data ,String accessToken) {
-//        if (sessionKey != null) {
-//            uri += sessionKey;
-//        }
+    public static HttpResponseHelper post(String url, String data ,String accessToken) {
         String content = null;
         String error = null;
 
@@ -46,6 +47,10 @@ public class HttpRequest {
             HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(new StringEntity(data));
             httpPost.setHeader("Content-type", "application/json");
+            if(accessToken != null){
+                httpPost.setHeader("X-accessToken", accessToken);
+            }
+
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             content = client.execute(httpPost, responseHandler);
         } catch (Exception e) {
@@ -53,13 +58,13 @@ public class HttpRequest {
         }
 
         if (error != null) {
-            return new HttpResponse(false, error);
+            return new HttpResponseHelper(false, error);
         } else {
-            return new HttpResponse(true, content);
+            return new HttpResponseHelper(true, content);
         }
     }
 
-    public static HttpResponse put(String url, String accessToken) {
+    public static HttpResponseHelper put(String url, String accessToken) {
         String content = null;
         String error = null;
 
@@ -75,9 +80,9 @@ public class HttpRequest {
         }
 
         if (error != null) {
-            return new HttpResponse(false, error);
+            return new HttpResponseHelper(false, error);
         } else {
-            return new HttpResponse(true, content);
+            return new HttpResponseHelper(true, content);
         }
     }
 }

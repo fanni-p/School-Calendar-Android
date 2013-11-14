@@ -1,7 +1,6 @@
 package com.finalproject.schoolcalendar;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -9,7 +8,6 @@ import android.os.Looper;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,15 +16,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.finalproject.schoolcalendar.data.DataPersister;
-import com.finalproject.schoolcalendar.data.HttpResponse;
+import com.finalproject.schoolcalendar.data.HttpResponseHelper;
 import com.finalproject.schoolcalendar.helpers.SessionManager;
 import com.finalproject.schoolcalendar.helpers.Sha1Generator;
 import com.finalproject.schoolcalendar.models.UserModel;
 import com.google.gson.Gson;
-
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends Activity {
 
@@ -112,7 +106,7 @@ public class LoginActivity extends Activity {
                 @Override
                 public void run() {
                     DataPersister.Register(userModel);
-                    HttpResponse response = DataPersister.Login(userModel);
+                    HttpResponseHelper response = DataPersister.Login(userModel);
                     handleLoginResponse(response);
                 }
             });
@@ -125,14 +119,14 @@ public class LoginActivity extends Activity {
             this.mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    HttpResponse response = DataPersister.Login(userModel);
+                    HttpResponseHelper response = DataPersister.Login(userModel);
                     handleLoginResponse(response);
                 }
             });
         }
     }
 
-    private void handleLoginResponse(HttpResponse response) {
+    private void handleLoginResponse(HttpResponseHelper response) {
         if (response.isStatusOk()) {
             UserModel resultUserModel = this.mGson.fromJson(response.getMessage(), UserModel.class);
             if (resultUserModel != null && resultUserModel.getAccessToken().length() == ACCESSTOKEN_LENGTH) {
