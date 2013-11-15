@@ -39,7 +39,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_showPassword"
+            android:text="@string/login_show_password"
             android:id="@+id/login_showPassword"
             android:checked="false"
             android:singleLine="false"
@@ -59,7 +59,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/login_loginButton"
+                android:text="@string/login_login_button"
                 android:id="@+id/loginButton"
                 android:layout_weight="1"
                 android:padding="@dimen/activity_horizontal_margin" />
@@ -67,7 +67,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/login_registerButton"
+                android:text="@string/login_register_button"
                 android:id="@+id/registerButton"
                 android:layout_weight="1"
                 android:padding="@dimen/activity_horizontal_margin" />

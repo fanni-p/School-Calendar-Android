@@ -11,10 +11,13 @@
 
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
-    <string name="login_loginButton">Login</string>
-    <string name="login_registerButton">Register</string>
-    <string name="login_showPassword">Show password</string>
+    <string name="login_login_button">Login</string>
+    <string name="login_register_button">Register</string>
+    <string name="login_show_password">Show password</string>
 
-    <string name="home_name">Your daily schedule</string><string name="home_lessontype_string">Lesson type -</string><string name="home_lessonroom_string">Room -</string><string name="home_lesson_separator">-</string>
+    <string name="home_name">Your daily schedule</string>
+    <string name="home_lesson_type_string">Lesson type</string>
+    <string name="home_lesson_room_string">Room</string>
+    <string name="home_lesson_separator">-</string>
 
 </resources>

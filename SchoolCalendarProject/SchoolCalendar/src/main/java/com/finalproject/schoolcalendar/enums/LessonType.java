@@ -1,4 +1,4 @@
-package com.finalproject.schoolcalendar.models;
+package com.finalproject.schoolcalendar.enums;
 
 import com.google.gson.annotations.SerializedName;
 

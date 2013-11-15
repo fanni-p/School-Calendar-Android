@@ -1,21 +1,28 @@
 package com.finalproject.schoolcalendar.models;
 
-import java.sql.Time;
+import com.finalproject.schoolcalendar.enums.LessonType;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Fani on 11/14/13.
  */
 public class LessonModel {
     private int id;
-    private String subject;
-    private String subjectColor;
-    private String day;
     private int dayNumber;
-    private String startTime;
-    private String endTime;
-    private LessonType type;
+    private String day;
     private String room;
     private String note;
+    private String subject;
+    private String endTime;
+    private String startTime;
+    private String subjectColor;
+    private LessonType type;
+    private Date date;
+    private SimpleDateFormat uiTimeFormat;
+    private SimpleDateFormat jsonTimeFormat;
 
     public LessonModel(int id, String subject, String subjectColor, String day,
                        int dayNumber, String startTime, String endTime, LessonType type, String room, String note) {
@@ -72,7 +79,21 @@ public class LessonModel {
     }
 
     public String getStartTime() {
-        return startTime;
+        if (this.uiTimeFormat == null) {
+            this.uiTimeFormat = new SimpleDateFormat("hh:mm aa");
+        }
+
+        try {
+            if (this.jsonTimeFormat == null) {
+                this.jsonTimeFormat = new SimpleDateFormat("HH:mm:ss");
+            }
+
+            this.date = this.jsonTimeFormat.parse(startTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return this.uiTimeFormat.format(date);
     }
 
     public void setStartTime(String startTime) {
@@ -80,7 +101,21 @@ public class LessonModel {
     }
 
     public String getEndTime() {
-        return endTime;
+        if (this.uiTimeFormat == null) {
+            this.uiTimeFormat = new SimpleDateFormat("hh:mm aa");
+        }
+
+        try {
+            if (this.jsonTimeFormat == null) {
+                this.jsonTimeFormat = new SimpleDateFormat("HH:mm:ss");
+            }
+
+            this.date = this.jsonTimeFormat.parse(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return this.uiTimeFormat.format(date);
     }
 
     public void setEndTime(String endTime) {
@@ -110,33 +145,4 @@ public class LessonModel {
     public void setNote(String note) {
         this.note = note;
     }
-
-//    public string StartTimeString
-//    {
-//        get
-//        {
-//            return this.StartTime.ToString(@"hh\:mm");
-//        }
-//    }
-//
-//    public string EndTimeString
-//    {
-//        get
-//        {
-//            return this.EndTime.ToString(@"hh\:mm");
-//        }
-//    }
-//
-//    public string LessonRoom
-//    {
-//        get
-//        {
-//            if (this.Room == "0" || String.IsNullOrEmpty(this.Room))
-//            {
-//                return "No room";
-//            }
-//
-//            return this.Room.ToString();
-//        }
-//    }
 }

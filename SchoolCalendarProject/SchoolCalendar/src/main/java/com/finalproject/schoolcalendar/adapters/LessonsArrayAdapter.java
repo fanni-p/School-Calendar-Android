@@ -1,7 +1,8 @@
-package com.finalproject.schoolcalendar.models;
+package com.finalproject.schoolcalendar.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.finalproject.schoolcalendar.R;
+import com.finalproject.schoolcalendar.helpers.ColorConverter;
 import com.finalproject.schoolcalendar.models.LessonModel;
 
 /**
@@ -36,8 +38,15 @@ public class LessonsArrayAdapter extends ArrayAdapter<LessonModel> {
             LayoutInflater inflater = ((Activity) this.mContext).getLayoutInflater();
             row = inflater.inflate(this.mResourceId, parent, false);
 
+            String convertedColor = ColorConverter.ParseColor(this.mLessonsObjects[position].getSubjectColor());
+            int color = Color.parseColor(convertedColor);
+
             lessonHolder = new LessonHolder();
             if (row != null) {
+                if (color != 0) {
+                    row.setBackgroundColor(color);
+                }
+
                 lessonHolder.lesson_title = (TextView) row.findViewById(R.id.lesson_title);
                 lessonHolder.lesson_type = (TextView) row.findViewById(R.id.lesson_type);
                 lessonHolder.lesson_room = (TextView) row.findViewById(R.id.lesson_room);
