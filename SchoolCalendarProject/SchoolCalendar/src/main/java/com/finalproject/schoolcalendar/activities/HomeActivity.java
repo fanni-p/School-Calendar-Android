@@ -1,4 +1,4 @@
-package com.finalproject.schoolcalendar;
+package com.finalproject.schoolcalendar.activities;
 
 import android.app.ListActivity;
 import android.content.res.Configuration;
@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.finalproject.schoolcalendar.R;
 import com.finalproject.schoolcalendar.data.DataPersister;
 import com.finalproject.schoolcalendar.data.HttpResponseHelper;
 import com.finalproject.schoolcalendar.helpers.NavigationDrawerManager;
@@ -39,7 +40,6 @@ public class HomeActivity extends ListActivity
     private LessonsArrayAdapter mLessonArrayAdapter;
     private NavigationDrawerManager mNavigationDrawerManager;
     private LessonModel[] mLessonsPerDay;
-    //private ViewPager mViewPager;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -54,20 +54,10 @@ public class HomeActivity extends ListActivity
         this.mUsername = user.get(SessionManager.KEY_NAME);
         this.mAccessToken = user.get(SessionManager.KEY_ACCESSTOKEN);
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        //mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-        //mCoursePagerAdapter = new CoursePagerAdapter(getSupportFragmentManager(), this);
-
-        // Set up the ViewPager with the sections adapter.
-        //mViewPager = (ViewPager) findViewById(R.id.pager);
-        //mViewPager.setAdapter(mSectionsPagerAdapter);
-        //mViewPager.setAdapter(mCoursePagerAdapter);
-
         this.mNavigationDrawerManager = new NavigationDrawerManager();
         this.mNavigationDrawerManager.init(this, this);
 
-        this.mHandledThread = new HandlerThread("UserServiceThread");
+        this.mHandledThread = new HandlerThread("HomeServiceThread");
         this.mHandledThread.start();
 
         Looper looper = this.mHandledThread.getLooper();
@@ -87,13 +77,12 @@ public class HomeActivity extends ListActivity
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //mCoursePagerAdapter.setCourseLib(optionLib);
         this.mNavigationDrawerManager.handleSelect(position);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.global, menu);
+        getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 

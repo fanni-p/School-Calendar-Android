@@ -47,4 +47,36 @@ public class DataPersister {
 
         return responseResult;
     }
+
+    public static HttpResponseHelper GetAllSubjects(String accessToken){
+        String allSubjectsUrl = BASE_URL + "subject";
+
+        HttpResponseHelper responseResult = HttpRequest.get(allSubjectsUrl, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper GetSubjectById(String accessToken, int id){
+        String subjectByIdUrl = BASE_URL + "subject/" + id;
+
+        HttpResponseHelper responseResult = HttpRequest.get(subjectByIdUrl, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper GetAllHomework(String accessToken){
+        String allHomeworkUrl = BASE_URL + "homework";
+
+        HttpResponseHelper responseResult = HttpRequest.get(allHomeworkUrl, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper GetHomeworkById(String accessToken, int id){
+        String homeworkByIdUrl = BASE_URL + "homework/" + id;
+
+        HttpResponseHelper responseResult = HttpRequest.get(homeworkByIdUrl, accessToken);
+
+        return responseResult;
+    }
 }

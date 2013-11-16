@@ -13,10 +13,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.finalproject.schoolcalendar.AllHomework;
-import com.finalproject.schoolcalendar.AllSubjects;
+import com.finalproject.schoolcalendar.activities.AllHomework;
+import com.finalproject.schoolcalendar.activities.AllSubjects;
 import com.finalproject.schoolcalendar.R;
-import com.finalproject.schoolcalendar.WeekSchedule;
+import com.finalproject.schoolcalendar.activities.WeekSchedule;
 
 /**
  * Created by Fani on 11/12/13.

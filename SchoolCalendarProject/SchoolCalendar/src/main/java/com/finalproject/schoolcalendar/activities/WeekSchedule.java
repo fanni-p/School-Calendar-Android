@@ -1,4 +1,4 @@
-package com.finalproject.schoolcalendar;
+package com.finalproject.schoolcalendar.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,19 +9,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.finalproject.schoolcalendar.R;
 import com.finalproject.schoolcalendar.helpers.NavigationDrawerManager;
 
 /**
  * Created by Fani on 11/16/13.
  */
-public class AllSubjects extends FragmentActivity
-    implements ListView.OnItemClickListener {
+public class WeekSchedule extends FragmentActivity
+        implements ListView.OnItemClickListener{
 
-        private NavigationDrawerManager mNavigationDrawerManager;
+    private NavigationDrawerManager mNavigationDrawerManager;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_subjects);
+        setContentView(R.layout.activity_weekschedule);
 
         this.mNavigationDrawerManager = new NavigationDrawerManager();
         this.mNavigationDrawerManager.init(this, this);
@@ -35,7 +36,7 @@ public class AllSubjects extends FragmentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.global, menu);
+        getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
@@ -46,8 +47,8 @@ public class AllSubjects extends FragmentActivity
 //                handleLogoutCommand();
 //                return true;
 //            default:
-        this.mNavigationDrawerManager.handleOnOptionsItemSelected(item);
-        return super.onOptionsItemSelected(item);
+                this.mNavigationDrawerManager.handleOnOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
 //        }
     }
 

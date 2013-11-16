@@ -24,6 +24,7 @@ public class LessonsArrayAdapter extends ArrayAdapter<LessonModel> {
 
     public LessonsArrayAdapter(Context context, int resourceId, LessonModel[] lessonsObjects) {
         super(context, resourceId, lessonsObjects);
+
         this.mContext = context;
         this.mResourceId = resourceId;
         this.mLessonsObjects = lessonsObjects;

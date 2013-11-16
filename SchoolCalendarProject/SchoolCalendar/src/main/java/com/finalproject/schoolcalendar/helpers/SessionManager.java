@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.finalproject.schoolcalendar.LoginActivity;
+import com.finalproject.schoolcalendar.activities.LoginActivity;
 
 import java.util.HashMap;
 

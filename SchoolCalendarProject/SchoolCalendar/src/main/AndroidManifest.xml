@@ -15,22 +15,23 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".HomeActivity">
+        android:theme="@style/AppTheme"
+        android:uiOptions="splitActionBarWhenNarrow">
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".WeekSchedule"
+            android:name=".activities.WeekSchedule"
             android:noHistory="true" />
         <activity
-            android:name=".AllSubjects"
+            android:name=".activities.AllSubjects"
             android:noHistory="true" />
         <activity
-            android:name=".AllHomework"
+            android:name=".activities.AllHomework"
             android:noHistory="true" />
     </application>
 </manifest>

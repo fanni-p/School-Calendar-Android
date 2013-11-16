@@ -1,4 +1,4 @@
-package com.finalproject.schoolcalendar;
+package com.finalproject.schoolcalendar.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.finalproject.schoolcalendar.R;
 import com.finalproject.schoolcalendar.data.DataPersister;
 import com.finalproject.schoolcalendar.data.HttpResponseHelper;
 import com.finalproject.schoolcalendar.helpers.SessionManager;
