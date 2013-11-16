@@ -19,5 +19,6 @@
     <string name="home_lesson_type_string">Lesson type</string>
     <string name="home_lesson_room_string">Room</string>
     <string name="home_lesson_separator">-</string>
+    <string name="home_loading_data">Loading feeddata...</string>
 
 </resources>

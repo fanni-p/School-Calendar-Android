@@ -1,13 +1,15 @@
 package com.finalproject.schoolcalendar;
 
+import android.app.ActionBar;
+import android.app.ListActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,7 +28,7 @@ import java.util.HashMap;
 /**
  * Created by Fani on 11/13/13.
  */
-public class HomeActivity extends FragmentActivity
+public class HomeActivity extends ListActivity
         implements ListView.OnItemClickListener {
 
     private Gson mGson;
@@ -127,6 +129,25 @@ public class HomeActivity extends FragmentActivity
         super.onConfigurationChanged(newConfig);
     }
 
+    public void handleLogoutCommand() {
+        final String accessToken = this.mAccessToken;
+        this.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                HttpResponseHelper response = DataPersister.Logout(accessToken);
+                HomeActivity.this.handleLogoutResponse(response);
+            }
+        });
+    }
+
+    public void handleLogoutResponse(HttpResponseHelper response) {
+        if (response.isStatusOk()) {
+            this.mSessionManager.logoutUser();
+        } else {
+            Toast.makeText(this, "Logout failed. Please try again!", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void getData() {
         final String accessToken = this.mAccessToken;
         this.mHandler.post(new Runnable() {
@@ -147,28 +168,10 @@ public class HomeActivity extends FragmentActivity
                 public void run() {
                     HomeActivity.this.mLessonArrayAdapter = new LessonsArrayAdapter(HomeActivity.this,
                             R.layout.lessonslist_item_row, HomeActivity.this.mLessonsPerDay);
-                    HomeActivity.this.mLessonsList = (ListView) findViewById(R.id.lessons_listview);
+                    HomeActivity.this.mLessonsList = (ListView) findViewById(android.R.id.list);
                     HomeActivity.this.mLessonsList.setAdapter(HomeActivity.this.mLessonArrayAdapter);
                 }
             });
-        }
-    }
-    private void handleLogoutCommand() {
-        final String accessToken = this.mAccessToken;
-        this.mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                HttpResponseHelper response = DataPersister.Logout(accessToken);
-                HomeActivity.this.handleLogoutResponse(response);
-            }
-        });
-    }
-
-    private void handleLogoutResponse(HttpResponseHelper response) {
-        if (response.isStatusOk()) {
-            this.mSessionManager.logoutUser();
-        } else {
-            Toast.makeText(this, "Logout failed. Please try again!", Toast.LENGTH_LONG).show();
         }
     }
 }

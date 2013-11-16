@@ -2,6 +2,8 @@ package com.finalproject.schoolcalendar.helpers;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +13,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.finalproject.schoolcalendar.AllHomework;
+import com.finalproject.schoolcalendar.AllSubjects;
 import com.finalproject.schoolcalendar.R;
+import com.finalproject.schoolcalendar.WeekSchedule;
 
 /**
  * Created by Fani on 11/12/13.
@@ -20,8 +25,10 @@ public class NavigationDrawerManager {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private ActionBarDrawerToggle mDrawerToggle;
+    private Context mContext;
 
     public void init(Activity theActivity, ListView.OnItemClickListener listener) {
+        this.mContext = theActivity;
         this.mDrawerLayout = (DrawerLayout) theActivity.findViewById(R.id.drawer_layout);
         this.mDrawerListView = (ListView) theActivity.findViewById(R.id.navigation_drawer);
 
@@ -35,7 +42,56 @@ public class NavigationDrawerManager {
         this.mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         this.mDrawerListView.setItemChecked(0, true);
 
-        setupActionBar(theActivity);
+        this.setupActionBar(theActivity);
+    }
+
+    public void handleSelect(int option) {
+        this.mDrawerListView.setItemChecked(option, true);
+        this.setSelection(option);
+        this.mDrawerLayout.closeDrawer(mDrawerListView);
+    }
+
+    public void handleOnPrepareOptionsMenu(Menu menu) {
+        boolean itemVisible = !this.mDrawerLayout.isDrawerOpen(this.mDrawerListView);
+
+        for (int index = 0; index < menu.size(); index++) {
+            MenuItem item = menu.getItem(index);
+            item.setEnabled(itemVisible);
+        }
+    }
+
+    public void handleOnOptionsItemSelected(MenuItem item) {
+        this.mDrawerToggle.onOptionsItemSelected(item);
+    }
+
+    public void syncState() {
+        this.mDrawerToggle.syncState();
+    }
+
+    public void setSelection(int option) {
+        switch (option){
+            case 0: this.startWeekScheduleActivity();
+                break;
+            case 1: this.startAllSubjectActivity();
+                break;
+            case 2: this.startAllHomeworkActivity();
+                break;
+        }
+    }
+
+    private void startWeekScheduleActivity() {
+        Intent intent = new Intent(this.mContext, WeekSchedule.class);
+        this.mContext.startActivity(intent);
+    }
+
+    private void startAllSubjectActivity() {
+        Intent intent = new Intent(this.mContext, AllSubjects.class);
+        this.mContext.startActivity(intent);
+    }
+
+    private void startAllHomeworkActivity() {
+        Intent intent = new Intent(this.mContext, AllHomework.class);
+        this.mContext.startActivity(intent);
     }
 
     private void setupActionBar(Activity currentActivity) {
@@ -63,32 +119,5 @@ public class NavigationDrawerManager {
                 super.onDrawerOpened(drawerView);
             }
         };
-    }
-
-    public void handleSelect(int option) {
-        this.mDrawerListView.setItemChecked(option, true);
-        this.mDrawerLayout.closeDrawer(mDrawerListView);
-    }
-
-    public void handleOnPrepareOptionsMenu(Menu menu) {
-        boolean itemVisible = !this.mDrawerLayout.isDrawerOpen(this.mDrawerListView);
-
-        for (int index = 0; index < menu.size(); index++) {
-            MenuItem item = menu.getItem(index);
-            item.setEnabled(itemVisible);
-//      item.setVisible(itemVisible);
-        }
-    }
-
-    public void handleOnOptionsItemSelected(MenuItem item) {
-        this.mDrawerToggle.onOptionsItemSelected(item);
-    }
-
-    public void syncState() {
-        this.mDrawerToggle.syncState();
-    }
-
-    public void setSelection(int option) {
-        this.mDrawerListView.setItemChecked(option, true);
     }
 }

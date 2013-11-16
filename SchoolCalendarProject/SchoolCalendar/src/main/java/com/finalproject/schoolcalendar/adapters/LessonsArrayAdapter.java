@@ -35,7 +35,7 @@ public class LessonsArrayAdapter extends ArrayAdapter<LessonModel> {
         LessonHolder lessonHolder;
 
         if (row == null) {
-            LayoutInflater inflater = ((Activity) this.mContext).getLayoutInflater();
+            LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(this.mResourceId, parent, false);
 
             String convertedColor = ColorConverter.ParseColor(this.mLessonsObjects[position].getSubjectColor());
