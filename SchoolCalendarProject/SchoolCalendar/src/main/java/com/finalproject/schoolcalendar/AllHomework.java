@@ -1,6 +1,5 @@
 package com.finalproject.schoolcalendar;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -36,7 +35,7 @@ public class AllHomework extends FragmentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 

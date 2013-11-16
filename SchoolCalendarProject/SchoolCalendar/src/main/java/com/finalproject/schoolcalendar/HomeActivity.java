@@ -1,6 +1,5 @@
 package com.finalproject.schoolcalendar;
 
-import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -95,7 +93,7 @@ public class HomeActivity extends ListActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 
