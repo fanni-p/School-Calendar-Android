@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:uiOptions="splitActionBarWhenNarrow">
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.HomeActivity">
+        <activity
+            android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,12 +27,12 @@
         </activity>
         <activity
             android:name=".activities.WeekSchedule"
-            android:noHistory="true" />
+            android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.AllSubjects"
-            android:noHistory="true" />
+            android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.AllHomework"
-            android:noHistory="true" />
+            android:parentActivityName=".activities.HomeActivity" />
     </application>
 </manifest>

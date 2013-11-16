@@ -29,6 +29,12 @@ public class AllHomework extends FragmentActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //mCoursePagerAdapter.setCourseLib(optionLib);
         this.mNavigationDrawerManager.handleSelect(position);

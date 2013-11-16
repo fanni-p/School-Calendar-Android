@@ -69,6 +69,12 @@ public class HomeActivity extends ListActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         this.mHandledThread.quit();

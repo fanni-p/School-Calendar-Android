@@ -22,27 +22,27 @@ import com.finalproject.schoolcalendar.activities.WeekSchedule;
  * Created by Fani on 11/12/13.
  */
 public class NavigationDrawerManager {
+    private Context mContext;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private Context mContext;
 
-    public void init(Activity theActivity, ListView.OnItemClickListener listener) {
-        this.mContext = theActivity;
-        this.mDrawerLayout = (DrawerLayout) theActivity.findViewById(R.id.drawer_layout);
-        this.mDrawerListView = (ListView) theActivity.findViewById(R.id.navigation_drawer);
+    public void init(Activity activity, ListView.OnItemClickListener listener) {
+        this.mContext = activity;
+        this.mDrawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
+        this.mDrawerListView = (ListView) activity.findViewById(R.id.navigation_drawer);
 
         String[] navigationDrawerOptions =
-                theActivity.getResources().getStringArray(R.array.navigation_drawer_options);
+                activity.getResources().getStringArray(R.array.navigation_drawer_options);
         ArrayAdapter<String> navigationDrawerAdapter =
-                new ArrayAdapter<String>(theActivity, R.layout.drawer_option_item, navigationDrawerOptions);
+                new ArrayAdapter<String>(activity, R.layout.drawer_option_item, navigationDrawerOptions);
 
         this.mDrawerListView.setAdapter(navigationDrawerAdapter);
         this.mDrawerListView.setOnItemClickListener(listener);
         this.mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         this.mDrawerListView.setItemChecked(0, true);
 
-        this.setupActionBar(theActivity);
+        this.setupActionBar(activity);
     }
 
     public void handleSelect(int option) {
