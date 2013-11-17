@@ -21,7 +21,7 @@ public class HttpRequest {
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet(url);
             httpGet.setHeader("Content-type", "application/json");
-            if(accessToken != null){
+            if (accessToken != null) {
                 httpGet.setHeader("X-accessToken", accessToken);
             }
 
@@ -38,7 +38,7 @@ public class HttpRequest {
         }
     }
 
-    public static HttpResponseHelper post(String url, String data ,String accessToken) {
+    public static HttpResponseHelper post(String url, String data, String accessToken) {
         String content = null;
         String error = null;
 
@@ -47,7 +47,7 @@ public class HttpRequest {
             HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(new StringEntity(data));
             httpPost.setHeader("Content-type", "application/json");
-            if(accessToken != null){
+            if (accessToken != null) {
                 httpPost.setHeader("X-accessToken", accessToken);
             }
 

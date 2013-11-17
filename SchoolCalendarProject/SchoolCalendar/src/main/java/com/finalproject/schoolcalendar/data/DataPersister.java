@@ -1,5 +1,6 @@
 package com.finalproject.schoolcalendar.data;
 
+import com.finalproject.schoolcalendar.models.SubjectModel;
 import com.finalproject.schoolcalendar.models.UserModel;
 import com.google.gson.Gson;
 
@@ -31,14 +32,14 @@ public class DataPersister {
         return responseResult;
     }
 
-    public  static HttpResponseHelper Logout(String accessToken) {
+    public static HttpResponseHelper Logout(String accessToken) {
         String logoutUrl = BASE_URL + "user/logout";
         HttpResponseHelper responseResult = HttpRequest.put(logoutUrl, accessToken);
 
         return responseResult;
     }
 
-    public static HttpResponseHelper GetLessonsPerDay(String accessToken){
+    public static HttpResponseHelper GetLessonsPerDay(String accessToken) {
         Date date = new Date();
         String currentDay = android.text.format.DateFormat.format("EEEE", date).toString();
         String lessonsPerDayUrl = BASE_URL + "lesson/byDay/" + currentDay;
@@ -48,7 +49,7 @@ public class DataPersister {
         return responseResult;
     }
 
-    public static HttpResponseHelper GetAllSubjects(String accessToken){
+    public static HttpResponseHelper GetAllSubjects(String accessToken) {
         String allSubjectsUrl = BASE_URL + "subject";
 
         HttpResponseHelper responseResult = HttpRequest.get(allSubjectsUrl, accessToken);
@@ -56,7 +57,7 @@ public class DataPersister {
         return responseResult;
     }
 
-    public static HttpResponseHelper GetSubjectById(String accessToken, int id){
+    public static HttpResponseHelper GetSubjectById(String accessToken, int id) {
         String subjectByIdUrl = BASE_URL + "subject/" + id;
 
         HttpResponseHelper responseResult = HttpRequest.get(subjectByIdUrl, accessToken);
@@ -64,7 +65,16 @@ public class DataPersister {
         return responseResult;
     }
 
-    public static HttpResponseHelper GetAllHomework(String accessToken){
+    public static HttpResponseHelper AddNewSubject(SubjectModel subjectModel, String accessToken) {
+        String registerUrl = BASE_URL + "subject";
+
+        String subjectModelToString = mGson.toJson(subjectModel);
+        HttpResponseHelper responseResult = HttpRequest.post(registerUrl, subjectModelToString, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper GetAllHomework(String accessToken) {
         String allHomeworkUrl = BASE_URL + "homework";
 
         HttpResponseHelper responseResult = HttpRequest.get(allHomeworkUrl, accessToken);
@@ -72,7 +82,7 @@ public class DataPersister {
         return responseResult;
     }
 
-    public static HttpResponseHelper GetHomeworkById(String accessToken, int id){
+    public static HttpResponseHelper GetHomeworkById(String accessToken, int id) {
         String homeworkByIdUrl = BASE_URL + "homework/" + id;
 
         HttpResponseHelper responseResult = HttpRequest.get(homeworkByIdUrl, accessToken);

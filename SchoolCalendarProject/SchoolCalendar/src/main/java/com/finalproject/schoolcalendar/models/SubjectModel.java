@@ -9,8 +9,7 @@ public class SubjectModel {
     private String teacher;
     private String color;
 
-    public SubjectModel(int id, String name, String teacher, String color) {
-        this.id = id;
+    public SubjectModel(String name, String teacher, String color) {
         this.name = name;
         this.teacher = teacher;
         this.color = color;

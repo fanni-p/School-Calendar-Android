@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/homeworks_daysleft_string"
+        android:text="@string/homework_daysleft_string"
         android:id="@+id/homework_daysleft_string"
         android:gravity="left"
         android:layout_marginTop="@dimen/activity_horizontal_margin"

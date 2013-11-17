@@ -23,11 +23,15 @@
     <string name="home_loading_data">Loading&#8230;</string>
     <string name="home_noroom_string">No Room</string>
 
-    <string name="homeworks_daysleft_string">Days left:</string>
+    <string name="allsubject_page_name">All Subjects</string>
+
+    <string name="homework_page_name">All Homeworks</string>
+    <string name="homework_daysleft_string">Days left:</string>
 
     <string name="add_subject_subjectname">Subject name</string>
     <string name="add_subject_teacher">Teacher</string>
     <string name="add_subject_color">Color</string>
     <string name="add_subject_create_button">Create</string>
+    <string name="add_subject_page_name">Add new subject</string>
 
 </resources>

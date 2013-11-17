@@ -44,7 +44,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setupButtons();
+        this.setupButtons();
 
         this.mGson = new Gson();
         this.mValidationSuccess = false;

@@ -41,8 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="All Subjects"
-            android:id="@+id/homeActivity_pageName"
+            android:text="@string/allsubject_page_name"
+            android:id="@+id/allsubjects_pageName"
             android:gravity="center_horizontal"/>
 
         <ListView

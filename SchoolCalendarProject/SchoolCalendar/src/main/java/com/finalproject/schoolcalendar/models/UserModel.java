@@ -5,12 +5,11 @@ package com.finalproject.schoolcalendar.models;
  */
 
 public class UserModel {
+
+    private int id;
     private String username;
     private String authCode;
     private String accessToken;
-
-    public UserModel(){
-    }
 
     public UserModel(String username, String authCode){
         this.username = username;
@@ -22,6 +21,14 @@ public class UserModel {
         this.username = username;
         this.authCode = authCode;
         this.accessToken = accessToken;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

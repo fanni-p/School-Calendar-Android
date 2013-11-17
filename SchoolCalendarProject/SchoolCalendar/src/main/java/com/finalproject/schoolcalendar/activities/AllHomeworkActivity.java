@@ -44,8 +44,8 @@ public class AllHomeworkActivity extends FragmentActivity
         setContentView(R.layout.activity_all_homework);
 
         this.mGson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        SessionManager sessionManager = new SessionManager(getApplicationContext());
 
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, String> user = sessionManager.getUserDetails();
         this.mAccessToken = user.get(SessionManager.KEY_ACCESSTOKEN);
 
