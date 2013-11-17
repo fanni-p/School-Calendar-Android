@@ -25,4 +25,9 @@
 
     <string name="homeworks_daysleft_string">Days left:</string>
 
+    <string name="add_subject_subjectname">Subject name</string>
+    <string name="add_subject_teacher">Teacher</string>
+    <string name="add_subject_color">Color</string>
+    <string name="add_subject_create_button">Create</string>
+
 </resources>

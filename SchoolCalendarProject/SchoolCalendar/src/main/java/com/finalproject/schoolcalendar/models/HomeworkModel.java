@@ -14,9 +14,6 @@ public class HomeworkModel {
     private boolean isDone;
     private String subject;
     private Date submitDate;
-    private SimpleDateFormat uiTimeFormat;
-    private SimpleDateFormat jsonTimeFormat;
-    private String date;
 
     public HomeworkModel(int id, String subject, Date submitDate, boolean isDone) {
         this.id = id;
@@ -56,40 +53,4 @@ public class HomeworkModel {
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
-
-//    public string DateAsString
-//    {
-//        get
-//        {
-//            return this.SubmitDate.ToString("dd/MM/yyyy");
-//        }
-//    }
-//
-//    public int DaysLeft
-//    {
-//        get
-//        {
-//            var daysLeft = CalculateDaysLeft();
-//            return daysLeft.Days;
-//        }
-//    }
-//
-//    public string ForegroundColor
-//    {
-//        get
-//        {
-//            if (this.DaysLeft <= 1)
-//            {
-//                return "Tomato";
-//            }
-//
-//            return "LimeGreen";
-//        }
-//    }
-//
-//    private TimeSpan CalculateDaysLeft()
-//    {
-//        var days = this.SubmitDate - DateTime.Today;
-//        return days;
-//    }
 }

@@ -25,13 +25,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.WeekSchedule"
+            android:name=".activities.WeekScheduleActivity"
             android:noHistory="true" />
         <activity
-            android:name=".activities.AllSubjects"
+            android:name=".activities.AllSubjectsActivity"
             android:noHistory="true" />
         <activity
-            android:name=".activities.AllHomework"
+            android:name=".activities.AllHomeworkActivity"
             android:noHistory="true" />
+        <activity android:name=".activities.AddSubjectActivity" />
     </application>
 </manifest>

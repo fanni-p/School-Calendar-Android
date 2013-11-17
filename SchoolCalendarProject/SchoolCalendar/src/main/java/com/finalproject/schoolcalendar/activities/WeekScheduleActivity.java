@@ -15,7 +15,7 @@ import com.finalproject.schoolcalendar.helpers.NavigationDrawerManager;
 /**
  * Created by Fani on 11/16/13.
  */
-public class WeekSchedule extends FragmentActivity
+public class WeekScheduleActivity extends FragmentActivity
         implements ListView.OnItemClickListener{
 
     private NavigationDrawerManager mNavigationDrawerManager;

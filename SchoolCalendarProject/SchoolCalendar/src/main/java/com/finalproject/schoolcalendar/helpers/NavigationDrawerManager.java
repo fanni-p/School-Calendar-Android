@@ -13,10 +13,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.finalproject.schoolcalendar.activities.AllHomework;
-import com.finalproject.schoolcalendar.activities.AllSubjects;
+import com.finalproject.schoolcalendar.activities.AllHomeworkActivity;
+import com.finalproject.schoolcalendar.activities.AllSubjectsActivity;
 import com.finalproject.schoolcalendar.R;
-import com.finalproject.schoolcalendar.activities.WeekSchedule;
+import com.finalproject.schoolcalendar.activities.WeekScheduleActivity;
 
 /**
  * Created by Fani on 11/12/13.
@@ -80,17 +80,17 @@ public class NavigationDrawerManager {
     }
 
     private void startWeekScheduleActivity() {
-        Intent intent = new Intent(this.mContext, WeekSchedule.class);
+        Intent intent = new Intent(this.mContext, WeekScheduleActivity.class);
         this.mContext.startActivity(intent);
     }
 
     private void startAllSubjectActivity() {
-        Intent intent = new Intent(this.mContext, AllSubjects.class);
+        Intent intent = new Intent(this.mContext, AllSubjectsActivity.class);
         this.mContext.startActivity(intent);
     }
 
     private void startAllHomeworkActivity() {
-        Intent intent = new Intent(this.mContext, AllHomework.class);
+        Intent intent = new Intent(this.mContext, AllHomeworkActivity.class);
         this.mContext.startActivity(intent);
     }
 
