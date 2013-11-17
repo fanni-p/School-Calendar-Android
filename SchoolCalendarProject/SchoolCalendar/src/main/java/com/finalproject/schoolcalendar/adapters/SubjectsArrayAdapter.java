@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.finalproject.schoolcalendar.R;
 import com.finalproject.schoolcalendar.helpers.ColorConverter;
+import com.finalproject.schoolcalendar.models.SubjectHolder;
 import com.finalproject.schoolcalendar.models.SubjectModel;
 
 /**
@@ -42,7 +43,7 @@ public class SubjectsArrayAdapter extends ArrayAdapter<SubjectModel> {
             String convertedColor = ColorConverter.ParseColor(this.mSubjectsObjects[position].getColor());
             subjectColor = Color.parseColor(convertedColor);
 
-            subjectHolder = new SubjectHolder();
+            subjectHolder = new SubjectHolder(row);
             if (row != null) {
                 subjectHolder.subject_name = (TextView) row.findViewById(R.id.subject_name);
                 subjectHolder.subject_color = (TextView) row.findViewById(R.id.subject_color);
@@ -60,10 +61,5 @@ public class SubjectsArrayAdapter extends ArrayAdapter<SubjectModel> {
         }
 
         return row;
-    }
-
-    public static class SubjectHolder {
-        TextView subject_name;
-        TextView subject_color;
     }
 }

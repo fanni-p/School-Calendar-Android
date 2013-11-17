@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.finalproject.schoolcalendar.R;
+import com.finalproject.schoolcalendar.models.HomeworkHolder;
 import com.finalproject.schoolcalendar.models.HomeworkModel;
 
 import java.util.Calendar;
@@ -41,13 +42,8 @@ public class HomeworkArrayAdapter extends ArrayAdapter<HomeworkModel> {
             LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(this.mResourceId, parent, false);
 
-            homeworkHolder = new HomeworkHolder();
+            homeworkHolder = new HomeworkHolder(row);
             if (row != null) {
-                homeworkHolder.homework_subject = (TextView) row.findViewById(R.id.homework_subject);
-                homeworkHolder.homework_submitdate = (TextView) row.findViewById(R.id.homework_submitdate);
-                homeworkHolder.homework_daysleft = (TextView) row.findViewById(R.id.homework_daysleft);
-                homeworkHolder.homework_daysleft_string = (TextView) row.findViewById(R.id.homework_daysleft_string);
-
                 row.setTag(homeworkHolder);
             }
         } else {
@@ -75,7 +71,7 @@ public class HomeworkArrayAdapter extends ArrayAdapter<HomeworkModel> {
         return row;
     }
 
-    public long daysBetween(Date endDate) {
+    private long daysBetween(Date endDate) {
         Calendar startDate = Calendar.getInstance();
         Calendar date = (Calendar) startDate.clone();
         Calendar end = new GregorianCalendar();
@@ -88,12 +84,5 @@ public class HomeworkArrayAdapter extends ArrayAdapter<HomeworkModel> {
         }
 
         return daysBetween;
-    }
-
-    public static class HomeworkHolder {
-        TextView homework_subject;
-        TextView homework_submitdate;
-        TextView homework_daysleft;
-        TextView homework_daysleft_string;
     }
 }

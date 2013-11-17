@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.finalproject.schoolcalendar.R;
 import com.finalproject.schoolcalendar.helpers.ColorConverter;
+import com.finalproject.schoolcalendar.models.LessonHolder;
 import com.finalproject.schoolcalendar.models.LessonModel;
 
 /**
@@ -42,17 +42,11 @@ public class LessonsArrayAdapter extends ArrayAdapter<LessonModel> {
             String convertedColor = ColorConverter.ParseColor(this.mLessonsObjects[position].getSubjectColor());
             int color = Color.parseColor(convertedColor);
 
-            lessonHolder = new LessonHolder();
+            lessonHolder = new LessonHolder(row);
             if (row != null) {
                 if (color != 0) {
                     row.setBackgroundColor(color);
                 }
-
-                lessonHolder.lesson_title = (TextView) row.findViewById(R.id.lesson_title);
-                lessonHolder.lesson_type = (TextView) row.findViewById(R.id.lesson_type);
-                lessonHolder.lesson_room = (TextView) row.findViewById(R.id.lesson_room);
-                lessonHolder.lesson_start = (TextView) row.findViewById(R.id.lesson_start);
-                lessonHolder.lesson_end = (TextView) row.findViewById(R.id.lesson_end);
 
                 row.setTag(lessonHolder);
             }
@@ -72,13 +66,5 @@ public class LessonsArrayAdapter extends ArrayAdapter<LessonModel> {
         }
 
         return row;
-    }
-
-    public static class LessonHolder {
-        TextView lesson_title;
-        TextView lesson_type;
-        TextView lesson_room;
-        TextView lesson_start;
-        TextView lesson_end;
     }
 }

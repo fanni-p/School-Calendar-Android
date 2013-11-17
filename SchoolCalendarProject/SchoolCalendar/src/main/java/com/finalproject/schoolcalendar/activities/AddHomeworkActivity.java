@@ -93,6 +93,12 @@ public class AddHomeworkActivity extends Activity {
         });
     }
 
+    private void setupSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.add_homework_spinner);
+        spinner.setAdapter(new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, this.mSubjects));
+    }
+
     private void handleAddHomeworkButtonCommand() {
         final String accessToken = this.mAccessToken;
         final HomeworkModel homeworkModel = this.createHomeworkModel();
@@ -127,13 +133,6 @@ public class AddHomeworkActivity extends Activity {
                 AddHomeworkActivity.this.handleGetAllSubjectsResponse(response);
             }
         });
-    }
-
-    private void setupSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.add_homework_spinner);
-        spinner.setAdapter(new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, this.mSubjects));
-
     }
 
     private void handleGetAllSubjectsResponse(HttpResponseHelper response) {

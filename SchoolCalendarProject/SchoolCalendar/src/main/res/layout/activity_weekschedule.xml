@@ -41,9 +41,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Week Schedule"
+            android:text="@string/week_schedule_pageName"
             android:id="@+id/homeActivity_pageName"
             android:gravity="center_horizontal"/>
+
+        <ExpandableListView
+            android:id="@+id/expandable_listview"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:cacheColorHint="#00000000"
+            android:scrollingCache="false"/>
     </LinearLayout>
 
     <ListView

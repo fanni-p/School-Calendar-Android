@@ -50,6 +50,16 @@ public class DataPersister {
         return responseResult;
     }
 
+    public static HttpResponseHelper GetLessonsPerDay(String day, String accessToken) {
+        Date date = new Date();
+        String currentDay = android.text.format.DateFormat.format("EEEE", date).toString();
+        String lessonsPerDayUrl = BASE_URL + "lesson/byDay/" + day;
+
+        HttpResponseHelper responseResult = HttpRequest.get(lessonsPerDayUrl, accessToken);
+
+        return responseResult;
+    }
+
     public static HttpResponseHelper GetAllSubjects(String accessToken) {
         String allSubjectsUrl = BASE_URL + "subject";
 

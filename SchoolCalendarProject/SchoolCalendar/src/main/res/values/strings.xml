@@ -3,6 +3,7 @@
 
     <string name="app_name">School Calendar</string>
     <string name="action_logout">Logout</string>
+    <string name="action_add_lesson">Add Lesson</string>
     <string name="action_add_subject">Add Subject</string>
     <string name="action_add_homework">Add Homework</string>
 
@@ -46,5 +47,6 @@
 
     <string name="edit_homework_page_name">Edit homework</string>
     <string name="edit_homework_edit_button">Edit</string>
+    <string name="week_schedule_pageName">Week Schedule</string>
 
 </resources>
