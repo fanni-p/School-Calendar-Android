@@ -28,10 +28,13 @@
     <string name="homework_page_name">All Homeworks</string>
     <string name="homework_daysleft_string">Days left:</string>
 
+    <string name="add_subject_page_name">Add new subject</string>
     <string name="add_subject_subjectname">Subject name</string>
     <string name="add_subject_teacher">Teacher</string>
     <string name="add_subject_color">Color</string>
     <string name="add_subject_create_button">Create</string>
-    <string name="add_subject_page_name">Add new subject</string>
+
+    <string name="edit_subject_page_name">Edit subject</string>
+    <string name="edit_subject_editbutton">Edit</string>
 
 </resources>

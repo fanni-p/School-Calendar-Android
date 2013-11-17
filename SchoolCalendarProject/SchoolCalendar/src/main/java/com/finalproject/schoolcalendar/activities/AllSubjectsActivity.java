@@ -31,6 +31,10 @@ import java.util.HashMap;
 public class AllSubjectsActivity extends ListActivity
         implements ListView.OnItemClickListener {
 
+    private static final int EDIT_SUBJECT = 0;
+    private static final int DELETE_SUBJECT = 1;
+    private static final String SELECTED_SUBJECT = "SelectedSubject";
+
     private Gson mGson;
     private String mAccessToken;
     private Handler mHandler;
@@ -114,15 +118,25 @@ public class AllSubjectsActivity extends ListActivity
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //TODO Handle on item select
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-//        int menuItemIndex = item.getItemId();
-//        String[] menuItems = getResources().getStringArray(R.array.edit_delete_menu);
-//        String menuItemName = menuItems[menuItemIndex];
-//        String listItemName = this.mAllSubjects[info.position].getName();
-//
-//        Toast.makeText(this, String.format("Selected %s for item %s", menuItemName, listItemName), Toast.LENGTH_LONG);
-        return true;
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case EDIT_SUBJECT:
+                this.handleEditSubjectCommand(this.mAllSubjects[info.position]);
+                return true;
+            case DELETE_SUBJECT:
+                //this.handleAddSubjectCommand();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void handleEditSubjectCommand(SubjectModel subjectModel) {
+        String subjectModelToString = this.mGson.toJson(subjectModel);
+
+        Intent intent = new Intent(this, EditSubjectActivity.class);
+        intent.putExtra(SELECTED_SUBJECT, subjectModelToString);
+        this.startActivity(intent);
     }
 
     @Override

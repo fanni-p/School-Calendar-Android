@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.finalproject.schoolcalendar.R;
 import com.finalproject.schoolcalendar.data.DataPersister;
@@ -28,21 +29,32 @@ import java.util.HashMap;
 /**
  * Created by Fani on 11/17/13.
  */
-public class AddSubjectActivity extends Activity {
+public class EditSubjectActivity extends Activity {
+
+    private static final String SELECTED_SUBJECT = "SelectedSubject";
 
     private Handler mHandler;
     private ColorEnum mColor;
+    private Spinner mColorBox;
     private String mTeacher;
     private String mSubjectName;
     private String mAccessToken;
-    private int mCurrentSelection;
+    private EditText mTeacherBox;
+    private EditText mSubjectNameBox;
     private SubjectModel mSubjectModel;
+    private SubjectModel mSelectedSubject;
     private HandlerThread mHandledThread;
 
+    private int mCurrentSelection;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subject);
+
+        Gson gson = new Gson();
+        Intent intent = getIntent();
+        String selectedSubject = intent.getStringExtra(SELECTED_SUBJECT);
+        this.mSelectedSubject = gson.fromJson(selectedSubject, SubjectModel.class);
 
         this.mColor = null;
         this.mTeacher = null;
@@ -60,8 +72,9 @@ public class AddSubjectActivity extends Activity {
             this.mHandler = new Handler(looper);
         }
 
-        this.setupCreateButton();
         this.setupSpinner();
+        this.setupFields();
+        this.setupCreateButton();
     }
 
     @Override
@@ -77,16 +90,6 @@ public class AddSubjectActivity extends Activity {
         this.mHandledThread = null;
     }
 
-    private void setupCreateButton() {
-        Button loginButton = (Button) this.findViewById(R.id.add_subject_createbutton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddSubjectActivity.this.handleCreateButtonCommand();
-            }
-        });
-    }
-
     private void setupSpinner() {
         final Spinner spinner = (Spinner) findViewById(R.id.add_subject_color_spinner);
         spinner.setAdapter(new ArrayAdapter<ColorEnum>
@@ -95,7 +98,7 @@ public class AddSubjectActivity extends Activity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (AddSubjectActivity.this.mCurrentSelection != position) {
+                if (EditSubjectActivity.this.mCurrentSelection != position) {
                     ColorEnum selection = (ColorEnum) spinner.getItemAtPosition(position);
 
                     if (selection != null) {
@@ -104,7 +107,7 @@ public class AddSubjectActivity extends Activity {
                         spinner.setBackgroundColor(color);
                     }
 
-                    AddSubjectActivity.this.mCurrentSelection = position;
+                    EditSubjectActivity.this.mCurrentSelection = position;
                 }
             }
 
@@ -115,7 +118,38 @@ public class AddSubjectActivity extends Activity {
         });
     }
 
+    private void setupFields() {
+        TextView pageName = (TextView) this.findViewById(R.id.addsubject_pageName);
+        pageName.setText(R.string.edit_subject_page_name);
+
+        int enumIndex = ColorEnum.valueOf(this.mSelectedSubject.getColor()).ordinal();
+        String convertedColor = ColorConverter.ParseColor
+                (ColorEnum.valueOf(this.mSelectedSubject.getColor()).toString());
+        int color = Color.parseColor(convertedColor);
+
+        this.mColorBox= (Spinner) this.findViewById(R.id.add_subject_color_spinner);
+        this.mTeacherBox = (EditText) this.findViewById(R.id.add_subject_new_teacher);
+        this.mSubjectNameBox = (EditText) this.findViewById(R.id.add_subject_new_subjectname);
+
+        this.mSubjectNameBox.setText(this.mSelectedSubject.getName());
+        this.mTeacherBox.setText(this.mSelectedSubject.getTeacher());
+        this.mColorBox.setSelection(enumIndex);
+        this.mColorBox.setBackgroundColor(color);
+    }
+
+    private void setupCreateButton() {
+        Button editButton = (Button) this.findViewById(R.id.add_subject_createbutton);
+        editButton.setText(R.string.edit_subject_editbutton);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditSubjectActivity.this.handleCreateButtonCommand();
+            }
+        });
+    }
+
     private void handleCreateButtonCommand() {
+        final int id = this.mSelectedSubject.getId();
         final String accessToken = this.mAccessToken;
         final SubjectModel subjectModel = this.createSubjectModel();
 
@@ -123,14 +157,14 @@ public class AddSubjectActivity extends Activity {
             this.mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    HttpResponseHelper response = DataPersister.AddNewSubject(subjectModel, accessToken);
-                    AddSubjectActivity.this.handleAddSubjectResponse(response);
+                    HttpResponseHelper response = DataPersister.EditSubject(subjectModel, accessToken, id);
+                    EditSubjectActivity.this.handleEditSubjectResponse(response);
                 }
             });
         }
     }
 
-    private void handleAddSubjectResponse(HttpResponseHelper response) {
+    private void handleEditSubjectResponse(HttpResponseHelper response) {
         if (response.isStatusOk()) {
             Intent intent = new Intent(this, AllSubjectsActivity.class);
             this.startActivity(intent);
@@ -139,13 +173,9 @@ public class AddSubjectActivity extends Activity {
     }
 
     private SubjectModel createSubjectModel() {
-        EditText subjectNameBox = (EditText) this.findViewById(R.id.add_subject_new_subjectname);
-        EditText teacherBox = (EditText) this.findViewById(R.id.add_subject_new_teacher);
-        Spinner colorBox = (Spinner) this.findViewById(R.id.add_subject_color_spinner);
-
-        this.mSubjectName = subjectNameBox.getText().toString();
-        this.mTeacher = teacherBox.getText().toString();
-        this.mColor = (ColorEnum) colorBox.getSelectedItem();
+        this.mSubjectName = this.mSubjectNameBox.getText().toString();
+        this.mTeacher = this.mTeacherBox.getText().toString();
+        this.mColor = (ColorEnum) this.mColorBox.getSelectedItem();
 
         String color = null;
         if (this.mColor != null) {

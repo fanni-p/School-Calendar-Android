@@ -66,10 +66,19 @@ public class DataPersister {
     }
 
     public static HttpResponseHelper AddNewSubject(SubjectModel subjectModel, String accessToken) {
-        String registerUrl = BASE_URL + "subject";
+        String addNewSubjectUrl = BASE_URL + "subject";
 
         String subjectModelToString = mGson.toJson(subjectModel);
-        HttpResponseHelper responseResult = HttpRequest.post(registerUrl, subjectModelToString, accessToken);
+        HttpResponseHelper responseResult = HttpRequest.post(addNewSubjectUrl, subjectModelToString, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper EditSubject(SubjectModel subjectModel, String accessToken, int id) {
+        String editSubjectUrl = BASE_URL + "subject/" + id;
+
+        String subjectModelToString = mGson.toJson(subjectModel);
+        HttpResponseHelper responseResult = HttpRequest.post(editSubjectUrl, subjectModelToString, accessToken);
 
         return responseResult;
     }
