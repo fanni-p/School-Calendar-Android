@@ -15,8 +15,13 @@ public class HomeworkModel {
     private String subject;
     private Date submitDate;
 
-    public HomeworkModel(int id, String subject, Date submitDate, boolean isDone) {
-        this.id = id;
+    public HomeworkModel(String subject, Date submitDate) {
+        this.subject = subject;
+        this.submitDate = submitDate;
+        this.isDone = false;
+    }
+
+    public HomeworkModel(String subject, Date submitDate, boolean isDone) {
         this.subject = subject;
         this.submitDate = submitDate;
         this.isDone = isDone;

@@ -4,6 +4,7 @@
     <string name="app_name">School Calendar</string>
     <string name="action_logout">Logout</string>
     <string name="action_add_subject">Add Subject</string>
+    <string name="action_add_homework">Add Homework</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -21,20 +22,26 @@
     <string name="home_lesson_room_string">Room</string>
     <string name="home_lesson_separator">-</string>
     <string name="home_loading_data">Loading&#8230;</string>
-    <string name="home_noroom_string">No Room</string>
+    <string name="home_no_room_string">No Room</string>
 
-    <string name="allsubject_page_name">All Subjects</string>
+    <string name="all_subject_page_name">All Subjects</string>
 
     <string name="homework_page_name">All Homeworks</string>
-    <string name="homework_daysleft_string">Days left:</string>
+    <string name="homework_days_left_string">Days left:</string>
 
     <string name="add_subject_page_name">Add new subject</string>
-    <string name="add_subject_subjectname">Subject name</string>
+    <string name="add_subject_subject_name">Subject name</string>
     <string name="add_subject_teacher">Teacher</string>
     <string name="add_subject_color">Color</string>
     <string name="add_subject_create_button">Create</string>
 
     <string name="edit_subject_page_name">Edit subject</string>
-    <string name="edit_subject_editbutton">Edit</string>
+    <string name="edit_subject_edit_button">Edit</string>
+
+    <string name="add_homework_page_name">Add new homework</string>
+    <string name="add_homework_subject">Choose subject</string>
+    <string name="add_homework_submit_date">Submit date</string>
+    <string name="add_homework_addbutton">Add homework</string>
+    <string name="add_homework_addNewSubjectButton">Add new subject</string>
 
 </resources>

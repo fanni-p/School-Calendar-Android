@@ -139,7 +139,7 @@ public class EditSubjectActivity extends Activity {
 
     private void setupCreateButton() {
         Button editButton = (Button) this.findViewById(R.id.add_subject_createbutton);
-        editButton.setText(R.string.edit_subject_editbutton);
+        editButton.setText(R.string.edit_subject_edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

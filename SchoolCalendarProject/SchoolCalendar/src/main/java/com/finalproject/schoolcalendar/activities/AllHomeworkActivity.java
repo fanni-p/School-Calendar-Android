@@ -1,5 +1,6 @@
 package com.finalproject.schoolcalendar.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -83,20 +84,20 @@ public class AllHomeworkActivity extends FragmentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
+        getMenuInflater().inflate(R.menu.allhomework_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_logout:
-//                handleLogoutCommand();
-//                return true;
-//            default:
-        this.mNavigationDrawerManager.handleOnOptionsItemSelected(item);
-        return super.onOptionsItemSelected(item);
-//        }
+        switch (item.getItemId()) {
+            case R.id.action_add_homework:
+                this.handleAddHomeworkCommand();
+                return true;
+            default:
+                this.mNavigationDrawerManager.handleOnOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -126,6 +127,11 @@ public class AllHomeworkActivity extends FragmentActivity
                 AllHomeworkActivity.this.handleGetAllHomeworkResponse(response);
             }
         });
+    }
+
+    private void handleAddHomeworkCommand() {
+        Intent intent = new Intent(this, AddHomeworkActivity.class);
+        this.startActivity(intent);
     }
 
     private void handleGetAllHomeworkResponse(HttpResponseHelper response) {

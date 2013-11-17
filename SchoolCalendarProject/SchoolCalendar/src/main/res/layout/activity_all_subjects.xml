@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/allsubject_page_name"
+            android:text="@string/all_subject_page_name"
             android:id="@+id/allsubjects_pageName"
             android:gravity="center_horizontal"/>
 

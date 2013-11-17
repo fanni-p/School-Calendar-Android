@@ -1,5 +1,7 @@
 package com.finalproject.schoolcalendar.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by Fani on 11/16/13.
  */
@@ -45,5 +47,14 @@ public class SubjectModel {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public static ArrayList<String> getNames(SubjectModel[] subjectModels){
+        ArrayList<String> names = new ArrayList<String>();
+        for(SubjectModel subject:subjectModels){
+            names.add(subject.getName());
+        }
+
+        return names;
     }
 }

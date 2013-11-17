@@ -2,6 +2,7 @@ package com.finalproject.schoolcalendar.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,7 @@ public class AllSubjectsActivity extends ListActivity
     private static final int EDIT_SUBJECT = 0;
     private static final int DELETE_SUBJECT = 1;
     private static final String SELECTED_SUBJECT = "SelectedSubject";
+    private static final String LAST_ACTIVITY = "LastActivity";
 
     private Gson mGson;
     private String mAccessToken;
@@ -124,11 +126,25 @@ public class AllSubjectsActivity extends ListActivity
                 this.handleEditSubjectCommand(this.mAllSubjects[info.position]);
                 return true;
             case DELETE_SUBJECT:
-                //this.handleAddSubjectCommand();
+                this.handleDeleteSubjectCommand(this.mAllSubjects[info.position].getId());
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    private void handleDeleteSubjectCommand(int id) {
+        final String accessToken = this.mAccessToken;
+        final int subjectId = id;
+        this.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                HttpResponseHelper response = DataPersister.DeleteSubject(accessToken, subjectId);
+                if (response.isStatusOk()) {
+                    AllSubjectsActivity.this.getData();
+                }
+            }
+        });
     }
 
     private void handleEditSubjectCommand(SubjectModel subjectModel) {
@@ -189,6 +205,11 @@ public class AllSubjectsActivity extends ListActivity
     }
 
     private void handleAddSubjectCommand() {
+        SharedPreferences preferences = getSharedPreferences(LAST_ACTIVITY, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(LAST_ACTIVITY, this.getClass().getName());
+        editor.commit();
+
         Intent intent = new Intent(this, AddSubjectActivity.class);
         this.startActivity(intent);
     }

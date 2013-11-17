@@ -2,6 +2,7 @@ package com.finalproject.schoolcalendar.data;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -75,6 +76,28 @@ public class HttpRequest {
             httpPut.setHeader("X-accessToken", accessToken);
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             content = client.execute(httpPut, responseHandler);
+        } catch (Exception e) {
+            error = e.getMessage();
+        }
+
+        if (error != null) {
+            return new HttpResponseHelper(false, error);
+        } else {
+            return new HttpResponseHelper(true, content);
+        }
+    }
+
+    public static HttpResponseHelper delete(String url, String accessToken) {
+        String content = null;
+        String error = null;
+
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpDelete httpDelete = new HttpDelete(url);
+            httpDelete.setHeader("Content-type", "application/json");
+            httpDelete.setHeader("X-accessToken", accessToken);
+            ResponseHandler<String> responseHandler = new BasicResponseHandler();
+            content = client.execute(httpDelete, responseHandler);
         } catch (Exception e) {
             error = e.getMessage();
         }

@@ -22,6 +22,10 @@ import com.finalproject.schoolcalendar.activities.WeekScheduleActivity;
  * Created by Fani on 11/12/13.
  */
 public class NavigationDrawerManager {
+    private static final int WEEK_SCHEDULE = 0;
+    private static final int ALL_SUBJECTS = 1;
+    private static final int ALL_HOMEWORK = 2;
+
     private Context mContext;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
@@ -70,11 +74,14 @@ public class NavigationDrawerManager {
 
     public void setSelection(int option) {
         switch (option){
-            case 0: this.startWeekScheduleActivity();
+            case WEEK_SCHEDULE:
+                this.startWeekScheduleActivity();
                 break;
-            case 1: this.startAllSubjectActivity();
+            case ALL_SUBJECTS:
+                this.startAllSubjectActivity();
                 break;
-            case 2: this.startAllHomeworkActivity();
+            case ALL_HOMEWORK:
+                this.startAllHomeworkActivity();
                 break;
         }
     }

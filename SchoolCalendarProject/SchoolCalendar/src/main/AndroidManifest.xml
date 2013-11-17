@@ -35,5 +35,6 @@
             android:noHistory="true" />
         <activity android:name=".activities.AddSubjectActivity" />
         <activity android:name=".activities.EditSubjectActivity" />
+        <activity android:name=".activities.AddHomeworkActivity" />
     </application>
 </manifest>

@@ -2,6 +2,7 @@ package com.finalproject.schoolcalendar.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,6 @@ import com.finalproject.schoolcalendar.enums.ColorEnum;
 import com.finalproject.schoolcalendar.helpers.ColorConverter;
 import com.finalproject.schoolcalendar.helpers.SessionManager;
 import com.finalproject.schoolcalendar.models.SubjectModel;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 
@@ -29,6 +29,8 @@ import java.util.HashMap;
  * Created by Fani on 11/17/13.
  */
 public class AddSubjectActivity extends Activity {
+
+    private static final String LAST_ACTIVITY = "LastActivity";
 
     private Handler mHandler;
     private ColorEnum mColor;
@@ -132,7 +134,16 @@ public class AddSubjectActivity extends Activity {
 
     private void handleAddSubjectResponse(HttpResponseHelper response) {
         if (response.isStatusOk()) {
-            Intent intent = new Intent(this, AllSubjectsActivity.class);
+
+            Class<?> activityClass;
+            SharedPreferences preferences = getSharedPreferences(LAST_ACTIVITY, MODE_PRIVATE);
+            try {
+                activityClass = Class.forName(preferences.getString(LAST_ACTIVITY, AllSubjectsActivity.class.getName()));
+            } catch (ClassNotFoundException e) {
+                activityClass = AllSubjectsActivity.class;
+            }
+
+            Intent intent = new Intent(this, activityClass);
             this.startActivity(intent);
             finish();
         }

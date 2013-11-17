@@ -1,6 +1,5 @@
 package com.finalproject.schoolcalendar.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.format.DateFormat;
@@ -67,7 +66,7 @@ public class LessonsArrayAdapter extends ArrayAdapter<LessonModel> {
         lessonHolder.lesson_start.setText(DateFormat.format("hh:mm aa", lesson.getStartTime()));
         lessonHolder.lesson_end.setText(DateFormat.format("hh:mm aa", lesson.getEndTime()));
         if(lesson.getRoom().equals("0")){
-            lessonHolder.lesson_room.setText(this.mContext.getString(R.string.home_noroom_string));
+            lessonHolder.lesson_room.setText(this.mContext.getString(R.string.home_no_room_string));
         } else {
             lessonHolder.lesson_room.setText(lesson.getRoom());
         }
