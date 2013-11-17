@@ -1,6 +1,7 @@
 package com.finalproject.schoolcalendar.data;
 
 import com.finalproject.schoolcalendar.models.HomeworkModel;
+import com.finalproject.schoolcalendar.models.LessonModel;
 import com.finalproject.schoolcalendar.models.SubjectModel;
 import com.finalproject.schoolcalendar.models.UserModel;
 import com.google.gson.Gson;
@@ -56,6 +57,15 @@ public class DataPersister {
         String lessonsPerDayUrl = BASE_URL + "lesson/byDay/" + day;
 
         HttpResponseHelper responseResult = HttpRequest.get(lessonsPerDayUrl, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper AddNewLesson(LessonModel lessonModel, String accessToken) {
+        String addNewLessonUrl = BASE_URL + "lesson";
+
+        String subjectModelToString = mGson.toJson(lessonModel);
+        HttpResponseHelper responseResult = HttpRequest.post(addNewLessonUrl, subjectModelToString, accessToken);
 
         return responseResult;
     }

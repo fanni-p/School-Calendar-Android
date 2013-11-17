@@ -21,13 +21,10 @@ public class LessonModel {
     private String subjectColor;
     private LessonType type;
 
-    public LessonModel(int id, String subject, String subjectColor, String day,
-                       int dayNumber, Date startTime, Date endTime, LessonType type, String room, String note) {
-        this.id = id;
+    public LessonModel(String subject, String day, Date startTime,
+                       Date endTime, LessonType type, String room, String note) {
         this.subject = subject;
-        this.subjectColor = subjectColor;
         this.day = day;
-        this.dayNumber = dayNumber;
         this.startTime = startTime;
         this.endTime = endTime;
         this.type = type;

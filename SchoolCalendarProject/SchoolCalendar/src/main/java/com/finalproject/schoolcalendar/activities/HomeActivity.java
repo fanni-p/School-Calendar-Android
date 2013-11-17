@@ -1,6 +1,7 @@
 package com.finalproject.schoolcalendar.activities;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -99,10 +100,17 @@ public class HomeActivity extends ListActivity
             case R.id.action_logout:
                 this.handleLogoutCommand();
                 return true;
+            case R.id.action_add_lesson:
+                this.handleAddLessonCommand();
             default:
                 this.mNavigationDrawerManager.handleOnOptionsItemSelected(item);
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void handleAddLessonCommand() {
+        Intent intent = new Intent(this, AddLessonActivity.class);
+        this.startActivity(intent);
     }
 
     @Override

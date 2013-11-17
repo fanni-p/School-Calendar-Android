@@ -48,5 +48,12 @@
     <string name="edit_homework_page_name">Edit homework</string>
     <string name="edit_homework_edit_button">Edit</string>
     <string name="week_schedule_pageName">Week Schedule</string>
+    <string name="add_lesson_page_name">Add new lesson</string>
+    <string name="choose_subject_name">Choose subject</string>
+    <string name="choose_lesson_type">Choose type</string>
+    <string name="start_time">Start time</string>
+    <string name="choose_day">Choose day</string>
+    <string name="end_time">End time</string>
+    <string name="add_lesson_button">Add</string><string name="room">Room</string><string name="note">Note</string>
 
 </resources>

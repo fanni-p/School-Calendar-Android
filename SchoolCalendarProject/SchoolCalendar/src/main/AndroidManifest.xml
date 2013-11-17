@@ -37,5 +37,6 @@
         <activity android:name=".activities.EditSubjectActivity" />
         <activity android:name=".activities.AddHomeworkActivity" />
         <activity android:name=".activities.EditHomeworkActivity" />
+        <activity android:name=".activities.AddLessonActivity" />
     </application>
 </manifest>
