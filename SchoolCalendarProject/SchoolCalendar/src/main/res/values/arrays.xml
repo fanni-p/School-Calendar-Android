@@ -5,7 +5,12 @@
         <item>All Subjects</item>
         <item>All Homework</item>
     </string-array>
-    <string-array name="edit_delete_menu">
+    <string-array name="subjects_context_menu">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+    <string-array name="homeworks_context_menu">
+        <item>Mark as done</item>
         <item>Edit</item>
         <item>Delete</item>
     </string-array>

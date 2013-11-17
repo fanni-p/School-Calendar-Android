@@ -58,14 +58,6 @@ public class DataPersister {
         return responseResult;
     }
 
-//    public static HttpResponseHelper GetSubjectById(String accessToken, int id) {
-//        String subjectByIdUrl = BASE_URL + "subject/" + id;
-//
-//        HttpResponseHelper responseResult = HttpRequest.get(subjectByIdUrl, accessToken);
-//
-//        return responseResult;
-//    }
-
     public static HttpResponseHelper AddNewSubject(SubjectModel subjectModel, String accessToken) {
         String addNewSubjectUrl = BASE_URL + "subject";
 
@@ -105,6 +97,31 @@ public class DataPersister {
 
         String subjectModelToString = mGson.toJson(homeworkModel);
         HttpResponseHelper responseResult = HttpRequest.post(addNewHomeworkUrl, subjectModelToString, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper MarkHomeworkAsDone(String accessToken, int id) {
+        String deleteHomeworkUrl = BASE_URL + "homework/" + id;
+
+        HttpResponseHelper responseResult = HttpRequest.put(deleteHomeworkUrl, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper EditHomework(SubjectModel subjectModel, String accessToken, int id) {
+        String editHomeworkUrl = BASE_URL + "homework/" + id;
+
+        String homeworkModelToString = mGson.toJson(subjectModel);
+        HttpResponseHelper responseResult = HttpRequest.post(editHomeworkUrl, homeworkModelToString, accessToken);
+
+        return responseResult;
+    }
+
+    public static HttpResponseHelper DeleteHomework(String accessToken, int id) {
+        String deleteHomeworkUrl = BASE_URL + "homework/" + id;
+
+        HttpResponseHelper responseResult = HttpRequest.delete(deleteHomeworkUrl, accessToken);
 
         return responseResult;
     }

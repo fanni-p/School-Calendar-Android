@@ -44,4 +44,7 @@
     <string name="add_homework_addbutton">Add homework</string>
     <string name="add_homework_addNewSubjectButton">Add new subject</string>
 
+    <string name="edit_homework_page_name">Edit homework</string>
+    <string name="edit_homework_edit_button">Edit</string>
+
 </resources>

@@ -99,7 +99,7 @@ public class AllSubjectsActivity extends ListActivity
         if (view.getId() == android.R.id.list) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
             menu.setHeaderTitle(this.mAllSubjects[info.position].getName());
-            String[] menuItems = getResources().getStringArray(R.array.edit_delete_menu);
+            String[] menuItems = getResources().getStringArray(R.array.subjects_context_menu);
             for (int i = 0; i < menuItems.length; i++) {
                 menu.add(Menu.NONE, i, i, menuItems[i]);
             }
@@ -131,28 +131,6 @@ public class AllSubjectsActivity extends ListActivity
             default:
                 return super.onContextItemSelected(item);
         }
-    }
-
-    private void handleDeleteSubjectCommand(int id) {
-        final String accessToken = this.mAccessToken;
-        final int subjectId = id;
-        this.mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                HttpResponseHelper response = DataPersister.DeleteSubject(accessToken, subjectId);
-                if (response.isStatusOk()) {
-                    AllSubjectsActivity.this.getData();
-                }
-            }
-        });
-    }
-
-    private void handleEditSubjectCommand(SubjectModel subjectModel) {
-        String subjectModelToString = this.mGson.toJson(subjectModel);
-
-        Intent intent = new Intent(this, EditSubjectActivity.class);
-        intent.putExtra(SELECTED_SUBJECT, subjectModelToString);
-        this.startActivity(intent);
     }
 
     @Override
@@ -211,6 +189,28 @@ public class AllSubjectsActivity extends ListActivity
         editor.commit();
 
         Intent intent = new Intent(this, AddSubjectActivity.class);
+        this.startActivity(intent);
+    }
+
+    private void handleDeleteSubjectCommand(int id) {
+        final String accessToken = this.mAccessToken;
+        final int subjectId = id;
+        this.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                HttpResponseHelper response = DataPersister.DeleteSubject(accessToken, subjectId);
+                if (response.isStatusOk()) {
+                    AllSubjectsActivity.this.getData();
+                }
+            }
+        });
+    }
+
+    private void handleEditSubjectCommand(SubjectModel subjectModel) {
+        String subjectModelToString = this.mGson.toJson(subjectModel);
+
+        Intent intent = new Intent(this, EditSubjectActivity.class);
+        intent.putExtra(SELECTED_SUBJECT, subjectModelToString);
         this.startActivity(intent);
     }
 }
